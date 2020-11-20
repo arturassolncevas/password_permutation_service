@@ -1,0 +1,36 @@
+{
+  "name": "password_management_tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && ./node_modules/webpack/bin/webpack.js --mode development --config webpack.dev.config.js",
+    "watch": "./node_modules/webpack/bin/webpack.js --watch --mode development --config webpack.dev.config.js",
+    "nodemon": "nodemon ./dist/server.js",
+    "runInParrarel": "npm-run-all -p nodemon watch",
+    "development": "npm run build && npm run runInParrarel"
+  },
+  "author": "A.S",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "nodemon": "^2.0.6",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.4.3",
+    "lodash": "^4.17.20",
+    "uribuilder": "^1.0.5",
+    "url": "^0.11.0",
+    "zlib": "^1.0.5"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.2.1"
+  }
+}
