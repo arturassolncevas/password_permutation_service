@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "chokidar": "^3.4.3",
+    "express": "^4.17.1",
     "lodash": "^4.17.20",
     "uribuilder": "^1.0.5",
     "url": "^0.11.0",
