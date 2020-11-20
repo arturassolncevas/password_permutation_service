@@ -18,6 +18,10 @@ const config = {
             },
         ]
     },
+    externals: {
+        knex: 'commonjs knex'
+    },
     plugins: [],
+    target: 'node'
 };
 module.exports = config;
