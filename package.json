@@ -8,7 +8,9 @@
     "watch": "./node_modules/webpack/bin/webpack.js --watch --mode development --config webpack.dev.config.js",
     "nodemon": "nodemon ./dist/server.js",
     "runInParrarel": "npm-run-all -p nodemon watch",
-    "development": "npm run build && npm run runInParrarel"
+    "development": "npm run build && npm run runInParrarel",
+    "create:migration": "knex migrate:make --knexfile=./db/knexfile.js",
+    "migrate": "./node_modules/knex/bin/cli.js migrate:latest --knexfile=./knexfile.js"
   },
   "author": "A.S",
   "license": "MIT",
@@ -25,6 +27,7 @@
   },
   "dependencies": {
     "chokidar": "^3.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.12",
     "lodash": "^4.17.20",
