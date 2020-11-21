@@ -32,6 +32,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
+    "express-validator": "^6.6.1",
     "file-loader": "^6.2.0",
     "knex": "^0.21.12",
     "lodash": "^4.17.20",
