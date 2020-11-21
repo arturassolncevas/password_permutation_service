@@ -1,7 +1,6 @@
 import { validations } from '../../helpers/validators/password-check-validator'
 import { validationResult } from 'express-validator'
 
-
 export const checkPassword = [
     validations,
     (req, res) => {
