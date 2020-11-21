@@ -3,7 +3,7 @@ exports.up = function(knex) {
     return knex.schema
         .createTable('users', function(table) {
             table.increments().primary()
-            table.string('username', 255).notNullable()
+            table.string('username', 255).unique().notNullable()
             table.timestamps(false, true)
         })
 };
