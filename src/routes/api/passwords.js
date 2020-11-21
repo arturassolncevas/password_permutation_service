@@ -1,10 +1,9 @@
-import { index } from '../../controllers/api/users-controller'
+import { checkPassword } from '../../controllers/api/passwords-controller'
 import express from 'express'
 
 const router = express.Router()
-const path = '/users'
+const path = '/passwords'
 
-router.get(path, index)
-router.post(`${path}/password-check`, index)
+router.post(`${path}/check`, checkPassword)
 
 export default router

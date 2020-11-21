@@ -1,1 +1,54 @@
-<div>Hello</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Password Management Tool test interface</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("form").on("submit", function(event){
+                event.preventDefault();
+                var serializeArray = $(this).serializeArray();
+                var data = {
+                    username: serializeArray[0].value,
+                    password: serializeArray[1].value
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "api/passwords/check",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(respData){
+                        $("#result").html(JSON.stringify(respData));
+                    },
+                    error: function(error) {
+                        console.log(error)
+                        $("#result").html('<div style="color: red;">' + error.responseText + '</div>');
+                    }
+                })
+            });
+        });
+    </script>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <p>
+        <label>Username</label>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label>Password</label>
+        <input type="text" name="name">
+    </p>
+    <input type="submit" value="Check password">
+</form>
+<div id="result"></div>
+</body>
+</html>
