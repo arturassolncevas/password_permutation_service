@@ -1,4 +1,5 @@
 // Imports: Dependencies
+const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 require("@babel/register");
 
@@ -12,16 +13,21 @@ const config = {
     module: {
         rules : [
             {
+                test: /\.html$/,
+                loader: "file-loader",
+                options: {
+                    name: '[path][name].[ext]',
+                }
+            },
+            {
                 test: /\.js/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
         ]
     },
-    externals: {
-        knex: 'commonjs knex'
-    },
     plugins: [],
-    target: 'node'
+    target: 'node',
+    externals: [nodeExternals()],
 };
 module.exports = config;
