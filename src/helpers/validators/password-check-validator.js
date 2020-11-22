@@ -1,6 +1,16 @@
-import { body } from 'express-validator'
+import { body, validationResult } from 'express-validator'
 
-export const validations = [
-        body('username', 'missing username').not().isEmpty(),
-        body('password', 'missing password').not().isEmpty()
-    ]
+const validations = [
+    body('username', 'missing username').trim().not().isEmpty(),
+    body('password', 'missing password').trim().not().isEmpty()
+]
+
+const checkValidations = (req, res, next) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty())
+        return next()
+    return res.status(400).json({errors: errors.array()})
+
+}
+
+export default [...validations, checkValidations]
