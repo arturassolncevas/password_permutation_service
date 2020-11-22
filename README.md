@@ -64,7 +64,7 @@ status: 400
 
 
 ### Web interface for testing
-If you find yourself bored of all those shell commans you are more than welcome to try api functionality via web interface. Simply hit APP_URL:APP_PORT Ex. 127.0.0.1:3000 in your browser.
+If you find yourself bored of all those shell commands you are more than welcome to test api functionality via web interface. Simply hit APP_URL:APP_PORT Ex. 127.0.0.1:3000 in your browser.
 
 <a href="https://ibb.co/L15JnmH"><img src="https://i.ibb.co/dDgLGFx/web.png" alt="web" border="0"></a>
 
