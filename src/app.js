@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 import express from 'express'
-import knex from '../db/knex'
 import { setupRoutes } from './routes/router'
 import { setupMiddleware } from './middleware/middleware'
 
