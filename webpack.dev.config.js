@@ -5,7 +5,7 @@ require("@babel/register");
 
 // Webpack Configuration
 const config = {
-    entry: './src/app.js',
+    entry: ['babel-polyfill', './src/app.js'],
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'server.js',
