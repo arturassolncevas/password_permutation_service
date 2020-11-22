@@ -1,7 +1,5 @@
 ### Description
-This application simulates api to check if a user is re-using password that is a permutation of the previous password used by the same user.  Ex. **wor1dhell0** and ** 01dehllorw** are premutations of  **hell0wor1d**
-
-------------
+This application simulates api to check if a user is re-using password that is a permutation of the previous password used by the same user.  Ex. **wor1dhell0** and **01dehllorw** are premutations of  **hell0wor1d**
 
 ### Setup guide
 ##### Requirements
@@ -27,16 +25,13 @@ Run in development or production modes
 npm run development
 ```
 
-------------
-
-
 ### API documentation
-####Authentication
+#### Authentication
 App uses basic auth. You can skip athentication by leaving BASIC_AUTH_USERNAME
 BASIC_AUTH_PASSWORD  blank in .env
 
-####Endpoints:
-#####Passwords
+#### Endpoints:
+##### Passwords
 - GET /api/passwords/last-updates  (Shows last 10 password mutations grouped by users)
 
 ```sh
@@ -66,8 +61,6 @@ status: 400
 	  ]
   }
 ```
-
-------------
 
 
 ### Web interface for testing
