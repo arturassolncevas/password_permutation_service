@@ -12,7 +12,7 @@ class App {
     start() {
         setupMiddleware(webServer)
         setupRoutes(webServer)
-        webServer.listen(PORT, () => {
+        webServer.listen(PORT, APP_URL, () => {
             console.log(`Listening at ${APP_URL}:${PORT}`)
         })
     }
