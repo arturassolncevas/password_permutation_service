@@ -25,3 +25,9 @@ export const checkPassword = [
         res.json(message)
     }
 ]
+
+export const lastUpdates = async (req, res) => {
+    let passwordMutations = await passwordManager.getLastMutations(10)
+    res.json(passwordMutations)
+}
+
