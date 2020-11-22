@@ -8,11 +8,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function(){
+        function updateList() {
+            $.ajax({
+                type: "get",
+                url: "/api/passwords/last-updates",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(respData){
+                    var table = $("table tbody");
+                    table.empty();
+                    $.each(respData, function(idx, elem){
+                        var tr = $('<tr/>');
+                        $('<td/>').text(elem.username).appendTo(tr);
+                        $('<td/>').text(elem.total_updates).appendTo(tr);
+                        $('<td/>').text(elem.updated_at).appendTo(tr);
+                        tr.appendTo(table);
+                    });
+                },
+                error: function(error) {
+                }
+            })
+        }
+        function setFormListeners() {
             $("form").on("submit", function(event){
                 event.preventDefault();
                 var serializeArray = $(this).serializeArray();
-                console.log(serializeArray)
                 var data = {
                     username: serializeArray[0].value,
                     password: serializeArray[1].value
@@ -24,26 +44,34 @@
                     data: JSON.stringify(data),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: function(respData){
-                        $("#result").text(JSON.stringify(respData, null, 2));
+                    success: function(respData, success, respObject){
+                        $("#status").text("Status: " + respObject.status).removeClass('warning');
+                        $("#result").text(JSON.stringify(respData, null, 2)).removeClass('warning');
+                        updateList()
                     },
                     error: function(error) {
-                        console.log(error)
-                        $("#result").text(JSON.stringify(error.responseJSON, null, 2));
+                        $("#status").text("Status: " + error.status).addClass('warning');
+                        $("#result").text(JSON.stringify(error.responseJSON, null, 2)).addClass('warning')
                     }
                 })
             });
+        }
+
+        $(document).ready(function(){
+            window.pollList = true;
+            setFormListeners();
+            updateList();
+            setInterval(updateList, 5000);
         });
     </script>
     <style>
-        label {
-            display: block;
-        }
+        label { display: block; }
+        .warning { color: red; }
     </style>
 </head>
 <body>
-<div style="height: 100vh; display: flex; justify-content: center; margin-top: 50px;">
-    <div class="col-md-3">
+<div style="height: 100vh; display: flex; justify-content: space-between; margin-top: 50px;">
+    <div class="col-md-4" style="margin: 0px 20px;">
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -55,10 +83,24 @@
             </div>
             <button style="float: right" type="submit" class="btn btn-primary">Check</button>
         </form>
-        <pre id="result" style="clear: both;">
-        </pre>
-        </pre>
+        <div id="status" style="clear: both;"></div>
+        <pre id="result"> </pre>
     </div>
+    <div class="col-md-6" style="margin: 0px 20px;">
+        <h4>Last 10 updates</h4>
+        <table class="table" id="bt-table">
+            <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Total updates</th>
+                <th scope="col">Last updated</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
 </body>
 </html>
