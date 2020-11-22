@@ -1,7 +1,8 @@
 {
-  "name": "password_management_tool",
+  "name": "password_permutation_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "This application simulates api to check if a user is re-using password that is a permutation of the previous password used by the same user.  Ex. wor1dhell0 and 01dehllorw are premutations of hell0wor1d",
+
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && ./node_modules/webpack/bin/webpack.js --mode development --config webpack.dev.config.js",
