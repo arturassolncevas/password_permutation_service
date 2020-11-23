@@ -4,24 +4,24 @@ import knex from "../../../db/knex";
 const tableName = 'password_mutations'
 
 class PasswordManager {
-    createMutation({ userId, password }) {
-        return knex.insert({
+    createMutation({ userId, password }, trx = null) {
+        return (trx || knex).insert({
             user_id: userId,
             password_hash: hash(password)
         }).into(tableName)
-            .then(e => this.getLastMutationHash(userId))
+            .then(e => this.getLastMutationHash(userId, trx))
     }
 
-    getLastMutationHash(userId) {
-        return knex(tableName)
+    getLastMutationHash(userId, trx = null) {
+        return (trx || knex)(tableName)
             .where('user_id', userId)
             .orderBy('id', 'desc')
             .limit(1)
             .then(e => e.length == 1 ? e[0].password_hash : null)
     }
 
-    getLastMutations(limit) {
-        return knex(tableName)
+    getLastMutations(limit, trx = null) {
+        return (trx || knex)(tableName)
             .select(knex.raw(`users.username, COUNT(*) as total_updates, MAX(${tableName}.updated_at) as updated_at`))
             .join('users', `${tableName}.user_id`, 'users.id')
             .groupBy('users.id')

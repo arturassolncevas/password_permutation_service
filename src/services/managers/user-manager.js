@@ -3,14 +3,14 @@ import knex from '../../../db/knex'
 const tableName = 'users'
 
 class UserManager {
-    findByUserName(username) {
-        return knex(tableName) .where('username', username)
+    findByUserName(username, trx = null) {
+        return (trx || knex)(tableName) .where('username', username)
             .then(e => e.length == 1 ? e[0] : null)
     }
-    createUser(params) {
-        return knex .insert(params)
+    createUser(params, trx = null) {
+        return (trx || knex) .insert(params)
             .into(tableName)
-            .then(e => this.findByUserName(params.username))
+            .then(e => this.findByUserName(params.username, trx))
     }
 }
 
