@@ -42,7 +42,7 @@ curl -H "Content-Type: application/json" -H "Authorization: Basic $BASIC_AUTH_TO
 ```sh
 curl -H "Content-Type: application/json" -H "Authorization: Basic $BASIC_AUTH_TOKEN" -X POST -d '{"username":"<username>", "password":"<password>"}' "${APP_URL}:${APP_PORT}/api/passwords/check"
 ```
-Returns true if new user password is premutation of previous one
+Returns true if new user password is permutation of previous one
 ```sh
 status: 200
 { "success": true }
