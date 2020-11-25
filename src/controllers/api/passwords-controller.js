@@ -16,7 +16,7 @@ export const checkPassword = [
 
         try {
             if (!user) {
-                let trx = await knex.transaction(async trx => {
+                await knex.transaction(async trx => {
                     user = await userManager.createUser({ username }, trx)
                     await passwordManager.createMutation({ userId: user.id, password }, trx)
                 })
@@ -27,7 +27,7 @@ export const checkPassword = [
                 } else { message.success = true }
             }
             res.json(message)
-        } catch (e) {return next(e) }
+        } catch (e) { return next(e) }
     }
 ]
 
